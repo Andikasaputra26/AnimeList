@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+img {
+  transition: 0.3s ease all;
+  -webkit-transform: 0.3s ease all;
+  -moz-transform: 0.3s ease all;
+  -ms-transform: 0.3s ease all;
+  -o-transform: 0.3s ease all;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+img:hover {
+  scale: 102%;
 }
