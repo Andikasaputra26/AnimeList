@@ -1,4 +1,5 @@
 "use client";
+
 import { useRef } from "react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
@@ -8,32 +9,25 @@ const InputSearch = () => {
   const router = useRouter();
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    const query = searchRef.current.value;
-    searchRef.current.value = "";
-
-    if (!query) return;
-
-    router.push(`/search/${query}`);
+    if (e.key === "Enter" || e.type === "click") {
+      e.preventDefault();
+      const keyword = searchRef.current.value;
+      router.push(`/search/${keyword}`);
+    }
   };
   return (
-    <form className="flex items-center gap-2 w-full md:w-auto">
+    <div className="relative">
       <input
         type="text"
-        placeholder="Search anime"
-        aria-label="Search anime"
+        placeholder="Cari Anime..."
+        className="w-full p-2 rounded"
         ref={searchRef}
-        className="flex-grow p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        onKeyDown={handleSearch}
       />
-      <button
-        type="submit"
-        aria-label="Search"
-        onClick={handleSearch}
-        className="p-2 bg-indigo-500 rounded-md text-white hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-      >
+      <button onClick={handleSearch} className="absolute top-2 end-2 ">
         <MagnifyingGlass size={24} />
       </button>
-    </form>
+    </div>
   );
 };
 
