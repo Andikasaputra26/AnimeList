@@ -1,36 +1,41 @@
+import { getAnimeResponse } from "@/app/libs/api-libs";
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
 
 const Page = async ({ params }) => {
   const { keyword } = params;
-  const decodeKeyword = decodeURI(keyword);
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?q=${decodeKeyword}`
-  );
+  // Decode parameter keyword
+  const decodedKeyword = decodeURI(keyword);
 
-  if (!response) {
-    console.error(
-      "Failed to fetch data:",
-      response.status,
-      response.statusText
-    );
+  try {
+    // Panggil API dengan keyword
+    const searchAnime = await getAnimeResponse("anime", `q=${decodedKeyword}`);
+
+    // Validasi data API
+    if (!searchAnime || !searchAnime.data || searchAnime.data.length === 0) {
+      throw new Error("Anime tidak ditemukan.");
+    }
+
     return (
-      <div>
-        <p>Error fetching data. Please try again later.</p>
-      </div>
+      <section>
+        <Header title={`Pencarian Untuk "${decodedKeyword}"`} />
+        <AnimeList api={searchAnime} />
+      </section>
+    );
+  } catch (error) {
+    console.error("Error fetching anime:", error.message);
+
+    // Tampilkan fallback UI jika terjadi error
+    return (
+      <section>
+        <Header title="Hasil Pencarian" />
+        <p className="text-center text-red-500">
+          Tidak dapat memuat data anime. Silakan coba lagi nanti.
+        </p>
+      </section>
     );
   }
-  const SearchAnime = await response.json();
-  const data = SearchAnime.data;
-  return (
-    <>
-      <section>
-        <Header title={`Pencarian Untuk ${decodeKeyword}`} />
-        <AnimeList api={data} />
-      </section>
-    </>
-  );
 };
 
 export default Page;

@@ -1,12 +1,11 @@
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
+import { getAnimeResponse } from "./libs/api-libs";
 
 const Page = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?limit=8`
-  );
-  const anime = await response.json();
-  const data = anime.data;
+
+
+  const topAnime = await getAnimeResponse("top/anime", "limit=8");
   return (
     <>
       <section>
@@ -15,7 +14,7 @@ const Page = async () => {
           linkHref="/popular"
           linkText="Lihat Semua"
         />
-        <AnimeList api={data} />
+        <AnimeList api={topAnime} />
       </section>
     </>
   );
