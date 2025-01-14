@@ -6,7 +6,7 @@ const AnimeList = ({ api }) => {
     <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 px-4">
       {api.data?.map((anime, index) => (
         <Link
-          href={`/${anime.mal_id}`}
+          href={`/anime/${anime.mal_id}`}
           className="cursor-pointer text-primary hover:text-accent transition-all"
           key={`${anime.mal_id}-${index}`}
         >
@@ -15,6 +15,7 @@ const AnimeList = ({ api }) => {
             alt={anime.title || "Anime image"}
             width={350}
             height={350}
+            priority
             className="w-full max-h-64 object-cover rounded-t-md"
           />
           <h3 className="font-bold md:text-xl p-4 text-sm">
