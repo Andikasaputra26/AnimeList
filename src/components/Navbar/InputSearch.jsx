@@ -42,21 +42,25 @@ const InputSearch = () => {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full sm:w-96">
+      {/* Input untuk pencarian */}
       <input
         type="text"
         placeholder="Cari Anime..."
-        className="w-full p-2 rounded"
+        className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
         ref={searchRef}
         onChange={handleInputChange}
       />
-      <button className="absolute top-2 end-2">
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-blue-500"
+        onClick={handleInputChange}
+      >
         <MagnifyingGlass size={24} />
       </button>
 
       {/* Dropdown untuk menampilkan hasil pencarian */}
       {results.length > 0 && (
-        <ul className="absolute w-full bg-white border rounded shadow-md mt-2 z-10">
+        <ul className="absolute w-full bg-white border border-gray-300 rounded shadow-md mt-2 z-10">
           {loading ? (
             <li className="p-2 text-center text-gray-500">Loading...</li>
           ) : (

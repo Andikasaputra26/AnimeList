@@ -1,5 +1,6 @@
 import Link from "next/link";
 import InputSearch from "./InputSearch";
+import UserActionButton from "./UserActionButton";
 
 const Navbar = () => {
   return (
@@ -9,12 +10,7 @@ const Navbar = () => {
           ANIMELIST
         </Link>
         <InputSearch />
-        <Link
-          href="/api/auth/signin"
-          className="font-bold px-2 py-1 text-primary bg-dark rounded w-28 text-center "
-        >
-          Sign In
-        </Link>
+        <UserActionButton />
       </div>
     </header>
   );
