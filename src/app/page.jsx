@@ -1,5 +1,6 @@
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
+import Navbar from "@/components/Navbar";
 import {
   getAnimeResponse,
   getNestedAnimeResponse,
@@ -17,6 +18,7 @@ const Page = async () => {
 
   return (
     <>
+      <Navbar />
       <section>
         <Header
           title="Top Popular"
